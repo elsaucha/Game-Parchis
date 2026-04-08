@@ -33,6 +33,7 @@ public class ColorHouse {
         drawSmallOvalCentered(houseSmallOvalSize);
         drawBoardCenter();
         drawColorCorridor();
+        createStartPoints();
     }
 
     private void drawBigOvalsCentered(int oval) {
@@ -89,6 +90,33 @@ public class ColorHouse {
         }
     }
 
+    //Colorea las casillas donde comienza cada color, dibuja el circulo y escribe 'SALIDA' en cada una
+    private void createStartPoints() {
+        changeOrientation(true);
+        this.graphics.setColor(Color.red);
+        this.graphics.fillRect(176,25*3+1,boxWidth-1,boxHeight-1);
+        this.graphics.setColor(Color.orange);
+        this.graphics.fillRect(360,626-25*4,boxWidth-1,boxHeight-1);
+        changeOrientation(false);
+        this.graphics.setColor(Color.blue);
+        this.graphics.fillRect(626-25*4,176,boxWidth-1,boxHeight-1);
+        this.graphics.setColor(Color.green);
+        this.graphics.fillRect(25*3+1,360,boxWidth-1,boxHeight-1);
+
+        this.graphics.setColor(Color.black);
+        this.graphics.setFont(new Font("Arial", Font.PLAIN, 6));
+        drawCenteredRotatedString(graphics, "SALIDA", 212, 77, 22, 22, 180);
+        drawCenteredRotatedString(graphics, "SALIDA", 527, 212, 22, 22, 270);
+        drawCenteredRotatedString(graphics, "SALIDA", 77, 395, 22, 22, 90);
+        drawCenteredRotatedString(graphics, "SALIDA", 395, 527, 22, 22, 0);
+
+        this.graphics.setColor(Color.black);
+        this.graphics.drawOval(212,77,22,22);
+        this.graphics.drawOval(527,212,22,22);
+        this.graphics.drawOval(77,395,22,22);
+        this.graphics.drawOval(395,527,22,22);
+    }
+
     //Función para cambiar la orientación de las casillas al dibujarlas
     private void changeOrientation(boolean verticalOrientation){
         if (verticalOrientation){
@@ -98,5 +126,34 @@ public class ColorHouse {
             this.boxWidth = 25;
             this.boxHeight = 92;
         }
+    }
+
+    //Función para rotar y escribir cualquier label
+    private void drawCenteredRotatedString(Graphics2D g2d, String text, int x, int y, int width, int height, int angleDegrees) {
+
+        // Centro del óvalo en tu caso
+        int centerX = x + width / 2;
+        int centerY = y + height / 2;
+
+        // Métricas del texto
+        FontMetrics fm = g2d.getFontMetrics();
+        int textWidth = fm.stringWidth(text);
+        int textHeight = fm.getAscent();
+
+        // Posición centrada (antes de rotar)
+        int textX = centerX - textWidth / 2;
+        int textY = centerY + textHeight / 2;
+
+        // Convertir a radianes
+        double angle = Math.toRadians(angleDegrees);
+
+        // Rotar alrededor del centro
+        g2d.rotate(angle, centerX, centerY);
+
+        // Dibujar texto
+        g2d.drawString(text, textX, textY);
+
+        // Deshacer rotación
+        g2d.rotate(-angle, centerX, centerY);
     }
 }
