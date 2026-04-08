@@ -9,14 +9,18 @@ public class Game extends JPanel{
     public static final int HEIGHT = 665;
     static JFrame frame;
     static Game game;
+    static Board board;
 
 
     public static void main(String[] args) throws InterruptedException {
         frame = new JFrame("Parchís");
         game = new Game();
+        board = new Board();
+
         game.setBackground(Color.white);
         frame.add(game);
         frame.setSize(WIDTH, HEIGHT);
+
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);                          //Abril la ventana en el medio de la pantalla
         frame.setResizable(false);                                  //No cambiar el tamaño de la ventana
@@ -31,6 +35,6 @@ public class Game extends JPanel{
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        new Board(graphics);
+        board.createBoard(graphics);
     }
 }

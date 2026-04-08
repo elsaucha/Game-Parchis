@@ -8,8 +8,7 @@ public class Board {
     private int houseRectSize = 175;
     private int houseBigOvalSize = 125;
     private int houseSmallOvalSize = 75;
-    public Board(Graphics2D graphics){
-        createBoard(graphics);
+    public Board(){
     }
 
     public void createBoard(Graphics2D graphics){
@@ -17,6 +16,7 @@ public class Board {
         createColorHouses(graphics);
         drawCenter(graphics);
         assignNumbers(graphics);
+        createSavePoints(graphics);
     }
 
     //Dibuja la casa de cada color - cuadrado sin fondo y circulo. Y los colores del centro del tablero
@@ -29,10 +29,10 @@ public class Board {
         int[] ygreen={201,426,313};
         int[] xyellow={201,425,313};
         int[] yyellow={425,425,313};
-        new ColorHouse(graphics, Color.red, 0,0, xred, yred, 25,true);
-        new ColorHouse(graphics, Color.blue, 451,0, xblue, yblue, 425, false);
-        new ColorHouse(graphics, Color.green, 0,451, xgreen, ygreen,25, false);
-        new ColorHouse(graphics, Color.orange, 451,451, xyellow, yyellow, 425, true);
+        new ColorHouse(Color.red, 0,0, xred, yred, 25,true).createColorHouses(graphics);
+        new ColorHouse(Color.blue, 451,0, xblue, yblue, 425, false).createColorHouses(graphics);
+        new ColorHouse(Color.green, 0,451, xgreen, ygreen,25, false).createColorHouses(graphics);
+        new ColorHouse(Color.orange, 451,451, xyellow, yyellow, 425, true).createColorHouses(graphics);
     }
 
     //Dibuja las lineas negras del centro del tablero
@@ -49,7 +49,7 @@ public class Board {
         for (int i = 175; i < 451; i = i+boxWidth){
             for (int j = 0; j < 610; j = j+boxHeight){
                 if (j < 175 || j >= 450){
-                    new Cell(graphics,i,j,true);
+                    new Cell(i,j,true).drawCell(graphics);
                 }
             }
         }
@@ -57,7 +57,7 @@ public class Board {
         for (int i = 0; i < 610; i = i+boxWidth){
             for (int j = 175; j < 451; j = j+boxHeight){
                 if (i < 175 || i >= 450){
-                    new Cell(graphics,i,j,false);
+                    new Cell(i,j,false).drawCell(graphics);
                 }
             }
         }
@@ -70,14 +70,14 @@ public class Board {
         int y=608;
         for (int i = 1; i <= 33; i++){
             if (i <= 8 ){
-                drawCenteredRotatedString(graphics,String.valueOf(i),360,y,10,10,0);
+                GraphicsUtils.drawCenteredRotatedString(graphics, String.valueOf(i), 360, y, 10, 10, 0);
                 if (i == 8){
                     y=188;
                 } else {
                     y=y-25;
                 }
             } else if (i >= 26){
-                drawCenteredRotatedString(graphics,String.valueOf(i),364,y,10,10,180);
+                GraphicsUtils.drawCenteredRotatedString(graphics,String.valueOf(i),364,y,10,10,180);
                 y=y-25;
             }
         }
@@ -86,14 +86,14 @@ public class Board {
         y=608;
         for (int i = 67; i >= 35; i--){
             if (i >= 60 ){
-                drawCenteredRotatedString(graphics,String.valueOf(i),250,y,10,10,0);
+                GraphicsUtils.drawCenteredRotatedString(graphics,String.valueOf(i),250,y,10,10,0);
                 if (i == 60){
                     y=188;
                 } else {
                     y=y-25;
                 }
             } else if (i <= 42){
-                drawCenteredRotatedString(graphics,String.valueOf(i),250,y,10,10,180);
+                GraphicsUtils.drawCenteredRotatedString(graphics,String.valueOf(i),250,y,10,10,180);
                 y=y-25;
             }
         }
@@ -102,14 +102,14 @@ public class Board {
         int x=5;
         for (int i = 50; i >= 18; i--){
             if (i >= 43){
-                drawCenteredRotatedString(graphics, String.valueOf(i),x, 251, 10, 10, 90);
+                GraphicsUtils.drawCenteredRotatedString(graphics, String.valueOf(i),x, 251, 10, 10, 90);
                 if (i == 43){
                     x=430;
                 } else {
                     x=x+25;
                 }
             } else if (i <= 25){
-                drawCenteredRotatedString(graphics, String.valueOf(i), x, 251, 10, 10, 270);
+                GraphicsUtils.drawCenteredRotatedString(graphics, String.valueOf(i), x, 251, 10, 10, 270);
                 x=x+25;
             }
         }
@@ -118,23 +118,36 @@ public class Board {
         x=430;
         for (int i = 9; i <= 59; i++){
             if (i <= 16){
-                drawCenteredRotatedString(graphics, String.valueOf(i),x, 365, 10, 10, 270);
+                GraphicsUtils.drawCenteredRotatedString(graphics, String.valueOf(i),x, 365, 10, 10, 270);
                 if (i == 16){
                     x=5;
                 } else {
                     x=x+25;
                 }
             } else if (i >= 52){
-                drawCenteredRotatedString(graphics, String.valueOf(i), x, 365, 10, 10, 90);
+                GraphicsUtils.drawCenteredRotatedString(graphics, String.valueOf(i), x, 365, 10, 10, 90);
                 x=x+25;
             }
         }
 
         //Centros
-        drawCenteredRotatedString(graphics, "17", 607,311, 10, 10, 270);
-        drawCenteredRotatedString(graphics, "34", 311,9, 10, 10, 180);
-        drawCenteredRotatedString(graphics, "51", 9,310, 10, 10, 90);
-        drawCenteredRotatedString(graphics, "68", 309,607, 10, 10, 0);
+        GraphicsUtils.drawCenteredRotatedString(graphics, "17", 607,311, 10, 10, 270);
+        GraphicsUtils.drawCenteredRotatedString(graphics, "34", 311,9, 10, 10, 180);
+        GraphicsUtils.drawCenteredRotatedString(graphics, "51", 9,310, 10, 10, 90);
+        GraphicsUtils.drawCenteredRotatedString(graphics, "68", 309,607, 10, 10, 0);
+    }
+
+    //Dibuja los circulos de seguridad
+    public void createSavePoints(Graphics2D gr){
+        gr.setColor(Color.black);
+        gr.drawOval(304,2,22,22);
+        gr.drawOval(396,77,22,22);
+        gr.drawOval(602,304,22,22);
+        gr.drawOval(527,396,22,22);
+        gr.drawOval(2,303,22,22);
+        gr.drawOval(77,211,22,22);
+        gr.drawOval(303,602,22,22);
+        gr.drawOval(211,527,22,22);
     }
 
     public void orientation(boolean verticalOrientation){
@@ -145,34 +158,5 @@ public class Board {
             boxWidth = 25;
             boxHeight = 92;
         }
-    }
-
-    //Función para rotar y escribir cualquier label
-    private void drawCenteredRotatedString(Graphics2D g2d, String text, int x, int y, int width, int height, int angleDegrees) {
-
-        // Centro del óvalo en tu caso
-        int centerX = x + width / 2;
-        int centerY = y + height / 2;
-
-        // Métricas del texto
-        FontMetrics fm = g2d.getFontMetrics();
-        int textWidth = fm.stringWidth(text);
-        int textHeight = fm.getAscent();
-
-        // Posición centrada (antes de rotar)
-        int textX = centerX - textWidth / 2;
-        int textY = centerY + textHeight / 2;
-
-        // Convertir a radianes
-        double angle = Math.toRadians(angleDegrees);
-
-        // Rotar alrededor del centro
-        g2d.rotate(angle, centerX, centerY);
-
-        // Dibujar texto
-        g2d.drawString(text, textX, textY);
-
-        // Deshacer rotación
-        g2d.rotate(-angle, centerX, centerY);
     }
 }
