@@ -3,40 +3,50 @@ package org.example;
 import java.awt.*;
 
 public class Board {
+    Color myRed = new Color(222, 126, 113);
+    Color myBlue = new Color(81, 83, 224);
+    Color myGreen = new Color(118, 214, 118);
+    Color myYellow = new Color(240, 233, 127);
+    int[] xred={201,426,313};
+    int[] yred={201,200,313};
+    int[] xblue={425,425,313};
+    int[] yblue={201,425,313};
+    int[] xgreen={201,201,313};
+    int[] ygreen={201,426,313};
+    int[] xyellow={201,425,313};
+    int[] yyellow={425,425,313};
     private int boxWidth;
     private int boxHeight;
     private int houseRectSize = 175;
     private int houseBigOvalSize = 125;
     private int houseSmallOvalSize = 75;
+    private ColorHouse redHouse, blueHouse, greenHouse, yellowHouse;
+
     public Board(){
+        redHouse = new ColorHouse(myRed, 0,0, xred, yred, 25,true);
+        blueHouse = new ColorHouse(myBlue, 451,0, xblue, yblue, 425, false);
+        greenHouse = new ColorHouse(myGreen, 0,451, xgreen, ygreen,25, false);
+        yellowHouse = new ColorHouse(myYellow, 451,451, xyellow, yyellow, 425, true);
     }
 
-    public void createBoard(Graphics2D graphics){
-        createWhiteSquares(graphics);
-        createColorHouses(graphics);
+    public void drawBoard(Graphics2D graphics){
+        drawWhiteSquares(graphics);
+        drawColorHouses(graphics);
         drawCenter(graphics);
         assignNumbers(graphics);
-        createSavePoints(graphics);
+        drawSavePoints(graphics);
     }
 
     //Dibuja la casa de cada color - cuadrado sin fondo y circulo. Y los colores del centro del tablero
-    public void createColorHouses(Graphics2D graphics){
-        int[] xred={201,426,313};
-        int[] yred={201,200,313};
-        int[] xblue={425,425,313};
-        int[] yblue={201,425,313};
-        int[] xgreen={201,201,313};
-        int[] ygreen={201,426,313};
-        int[] xyellow={201,425,313};
-        int[] yyellow={425,425,313};
-        new ColorHouse(Color.red, 0,0, xred, yred, 25,true).createColorHouses(graphics);
-        new ColorHouse(Color.blue, 451,0, xblue, yblue, 425, false).createColorHouses(graphics);
-        new ColorHouse(Color.green, 0,451, xgreen, ygreen,25, false).createColorHouses(graphics);
-        new ColorHouse(Color.orange, 451,451, xyellow, yyellow, 425, true).createColorHouses(graphics);
+    private void drawColorHouses(Graphics2D graphics){
+        redHouse.drawColorHouses(graphics);
+        blueHouse.drawColorHouses(graphics);
+        greenHouse.drawColorHouses(graphics);
+        yellowHouse.drawColorHouses(graphics);
     }
 
     //Dibuja las lineas negras del centro del tablero
-    public void drawCenter(Graphics graphics){
+    private void drawCenter(Graphics graphics){
         graphics.setColor(Color.black);
         graphics.drawRect(200,200,225,225);
         graphics.drawLine(175,175,451,451);
@@ -44,7 +54,7 @@ public class Board {
     }
 
     //Dibuja las casillas blancas normales (también crea las de los pasillos de colores, sin color)
-    public void createWhiteSquares(Graphics2D graphics){
+    private void drawWhiteSquares(Graphics2D graphics){
         orientation(true);
         for (int i = 175; i < 451; i = i+boxWidth){
             for (int j = 0; j < 610; j = j+boxHeight){
@@ -63,7 +73,7 @@ public class Board {
         }
     }
 
-    public void assignNumbers(Graphics2D graphics){
+    private void assignNumbers(Graphics2D graphics){
         graphics.setFont(new Font("Arial", Font.PLAIN, 16));
 
         //Columna amarillo-azul
@@ -138,7 +148,7 @@ public class Board {
     }
 
     //Dibuja los circulos de seguridad
-    public void createSavePoints(Graphics2D gr){
+    private void drawSavePoints(Graphics2D gr){
         gr.setColor(Color.black);
         gr.drawOval(304,2,22,22);
         gr.drawOval(396,77,22,22);
@@ -150,7 +160,7 @@ public class Board {
         gr.drawOval(211,527,22,22);
     }
 
-    public void orientation(boolean verticalOrientation){
+    private void orientation(boolean verticalOrientation){
         if (verticalOrientation){
             boxWidth = 92;
             boxHeight = 25;

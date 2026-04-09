@@ -4,15 +4,35 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Game extends JPanel{
-    public static final int WIDTH = 640;
-    public static final int HEIGHT = 665;
+    protected static final int WIDTH = 640;
+    protected static final int HEIGHT = 665;
     private Board board;
+    private Piece pR1,pR2,pR3,pR4,pB1,pB2,pB3,pB4,pY1,pY2,pY3,pY4,pG1,pG2,pG3,pG4;
     private GameLogic gameLogic;
+    int[] coordinates = {15, 140, 465, 590};
+    Dice dice;
+    int dicePositionX = 283;
+    int DicePositionY = 283;
+    int diceSize = 60;
     public Game(){
         setBackground(Color.white);
 
         this.board = new Board();
         this.gameLogic = new GameLogic();
+        this.dice = new Dice();
+        createPieces();
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                int mouseX = e.getX();
+                int mouseY = e.getY();
+
+                if (isDiceClicked(mouseX, mouseY)){
+                    gameLogic.rollDice();
+                }
+            }
+        });
 
         new Timer(16, e -> update()).start();
     }
@@ -28,7 +48,66 @@ public class Game extends JPanel{
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        board.createBoard(graphics);
-        //piece.createPieces
+        board.drawBoard(graphics);
+        drawPieces(graphics);
+        drawDice(graphics);
+    }
+
+    private void drawDice(Graphics2D graphics){
+        int value = gameLogic.getDiceValue();
+        graphics.drawImage(dice.diceImages[value-1],dicePositionX, DicePositionY,diceSize,diceSize,null);
+    }
+
+    private boolean isDiceClicked(int x, int y){
+        if (x >= dicePositionX && x <= dicePositionX+diceSize && y >= DicePositionY && y <= DicePositionY+diceSize){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private void createPieces(){
+        pR1 = new Piece(1, coordinates[0], coordinates[0]);
+        pR2 = new Piece(2, coordinates[1], coordinates[0]);
+        pR3 = new Piece(3, coordinates[0], coordinates[1]);
+        pR4 = new Piece(4, coordinates[1], coordinates[1]);
+
+        pB1 = new Piece(1, coordinates[2], coordinates[0]);
+        pB2 = new Piece(2, coordinates[3], coordinates[0]);
+        pB3 = new Piece(3, coordinates[2], coordinates[1]);
+        pB4 = new Piece(4, coordinates[3], coordinates[1]);
+
+        pG1 = new  Piece(1, coordinates[0], coordinates[2]);
+        pG2 = new Piece(2, coordinates[1], coordinates[2]);
+        pG3 = new Piece(3, coordinates[0], coordinates[3]);
+        pG4 = new Piece(4, coordinates[1], coordinates[3]);
+
+        pY1 = new Piece(1, coordinates[2], coordinates[2]);
+        pY2 = new Piece(2, coordinates[3], coordinates[2]);
+        pY3 = new Piece(3, coordinates[2], coordinates[3]);
+        pY4 = new Piece(4, coordinates[3], coordinates[3]);
+    }
+
+    private void drawPieces(Graphics2D graphics){
+        pR1.drawPieces(graphics, "red");
+        pR2.drawPieces(graphics, "red");
+        pR3.drawPieces(graphics, "red");
+        pR4.drawPieces(graphics, "red");
+
+        pB1.drawPieces(graphics, "blue");
+        pB2.drawPieces(graphics, "blue");
+        pB3.drawPieces(graphics, "blue");
+        pB4.drawPieces(graphics, "blue");
+
+        pG1.drawPieces(graphics, "green");
+        pG2.drawPieces(graphics, "green");
+        pG3.drawPieces(graphics, "green");
+        pG4.drawPieces(graphics, "green");
+
+        pY1.drawPieces(graphics, "yellow");
+        pY2.drawPieces(graphics, "yellow");
+        pY3.drawPieces(graphics, "yellow");
+        pY4.drawPieces(graphics, "yellow");
+
     }
 }

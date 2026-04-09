@@ -4,6 +4,10 @@ import java.awt.*;
 
 public class ColorHouse {
     private Color color;
+    Color myRed = new Color(222, 126, 113);
+    Color myBlue = new Color(81, 83, 224);
+    Color myGreen = new Color(118, 214, 118);
+    Color myYellow = new Color(240, 233, 127);
     private int houseRectSize = 175;
     private int houseBigOvalSize = 125;
     private int houseSmallOvalSize = 75;
@@ -23,14 +27,14 @@ public class ColorHouse {
         this.verticalOrientation = verticalOrientation;
     }
 
-    public void createColorHouses(Graphics2D gr){
+    public void drawColorHouses(Graphics2D gr){
         gr.setColor(Color.black);
         gr.drawRect(this.x,this.y, this.houseRectSize, this.houseRectSize);
         GraphicsUtils.drawBigOvalsCentered(gr, this.x, this.y, this.color,houseBigOvalSize, houseRectSize);
         GraphicsUtils.drawSmallOvalCentered(gr, this.x, this.y, houseSmallOvalSize, houseRectSize);
         drawBoardCenter(gr);
         drawColorCorridor(gr);
-        createStartPoints(gr);
+        drawStartPoints(gr);
     }
 
     private void drawBoardCenter(Graphics2D gr){
@@ -44,30 +48,30 @@ public class ColorHouse {
         int finalX = this.corridorCoordenate+this.boxSize*7;
         for (int i = this.corridorCoordenate; i < finalX; i = i+this.boxSize) {
             if (verticalOrientation) {
+                gr.setColor(this.color);
+                gr.fillRect(267 + 1, i + 1, this.boxWidth, this.boxHeight);
                 gr.setColor(Color.black);
                 gr.drawRect(267, i, this.boxWidth, this.boxHeight);
-                gr.setColor(this.color);
-                gr.fillRect(267 + 1, i + 1, this.boxWidth - 1, this.boxHeight - 1);
             } else {
                 gr.setColor(Color.black);
                 gr.drawRect(i,267,this.boxWidth,this.boxHeight);
                 gr.setColor(this.color);
-                gr.fillRect(i+1,267+1,this.boxWidth-1,this.boxHeight-1);
+                gr.fillRect(i+1,267+1,this.boxWidth,this.boxHeight);
             }
         }
     }
 
     //Colorea las casillas donde comienza cada color, dibuja el circulo y escribe 'SALIDA' en cada una
-    private void createStartPoints(Graphics2D gr) {
+    private void drawStartPoints(Graphics2D gr) {
         changeOrientation(true);
-        gr.setColor(Color.red);
+        gr.setColor(myRed);
         gr.fillRect(176,25*3+1,boxWidth-1,boxHeight-1);
-        gr.setColor(Color.orange);
+        gr.setColor(myYellow);
         gr.fillRect(360,626-25*4,boxWidth-1,boxHeight-1);
         changeOrientation(false);
-        gr.setColor(Color.blue);
+        gr.setColor(myBlue);
         gr.fillRect(626-25*4,176,boxWidth-1,boxHeight-1);
-        gr.setColor(Color.green);
+        gr.setColor(myGreen);
         gr.fillRect(25*3+1,360,boxWidth-1,boxHeight-1);
 
         gr.setColor(Color.black);

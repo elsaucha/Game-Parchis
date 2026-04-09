@@ -14,10 +14,10 @@ public class Cell {
 
     public void drawCell(Graphics2D gr){
         orientation(verticalOrientation);
+        gr.setColor(Color.white);
+        gr.fillRect(this.x+1,this.y+1,boxWidth,boxHeight);
         gr.setColor(Color.black);
         gr.drawRect(this.x,this.y,boxWidth,boxHeight);
-        gr.setColor(Color.white);
-        gr.fillRect(this.x+1,this.y+1,boxWidth-1,boxHeight-1);
     }
 
     private void orientation(boolean verticalOrientation){
