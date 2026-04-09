@@ -2,6 +2,8 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class Game extends JPanel{
     protected static final int WIDTH = 640;
@@ -9,11 +11,11 @@ public class Game extends JPanel{
     private Board board;
     private Piece pR1,pR2,pR3,pR4,pB1,pB2,pB3,pB4,pY1,pY2,pY3,pY4,pG1,pG2,pG3,pG4;
     private GameLogic gameLogic;
-    int[] coordinates = {15, 140, 465, 590};
-    Dice dice;
-    int dicePositionX = 283;
-    int DicePositionY = 283;
-    int diceSize = 60;
+    private int[] coordinates = {15, 140, 465, 590};
+    private Dice dice;
+    private int dicePositionX = 283;
+    private int DicePositionY = 283;
+    private int diceSize = 60;
     public Game(){
         setBackground(Color.white);
 
@@ -29,7 +31,7 @@ public class Game extends JPanel{
                 int mouseY = e.getY();
 
                 if (isDiceClicked(mouseX, mouseY)){
-                    gameLogic.rollDice();
+                    rollingDiceAnimation();
                 }
             }
         });
@@ -64,6 +66,25 @@ public class Game extends JPanel{
         }else {
             return false;
         }
+    }
+
+    private void rollingDiceAnimation(){
+        Timer animationTimer = new Timer(80, null);
+
+        animationTimer.addActionListener(e1 -> {
+            gameLogic.rollDice();
+            repaint();
+        });
+        animationTimer.start();
+
+        new Timer(700, e2 -> {
+            animationTimer.stop();
+
+            gameLogic.rollDice();
+            repaint();
+
+            ((Timer)e2.getSource()).stop();
+        }).start();
     }
 
     private void createPieces(){
