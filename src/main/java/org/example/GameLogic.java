@@ -151,7 +151,7 @@ public class GameLogic {
                         piece.setLocation(piece.getLocation()+1);
                     }else {
                         piece.setY(212);
-                        piece.setX(603+(25*(-z-2))-1);
+                        piece.setX(603-(25*(-z-2))-1);
                         piece.setLocation(piece.getLocation()+2);
                     }
                     piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
@@ -213,7 +213,7 @@ public class GameLogic {
                         piece.setX(piece.getX()-(92*this.diceValue));
                     }else {
                         piece.setX(212);
-                        piece.setY(3-(25*(-z))-1);
+                        piece.setY(3+(25*(-z))-1);
                         piece.setLocation(1);
                     }
                     piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
