@@ -53,10 +53,10 @@ public class ColorHouse {
                 gr.setColor(Color.black);
                 gr.drawRect(267, i, this.boxWidth, this.boxHeight);
             } else {
-                gr.setColor(Color.black);
-                gr.drawRect(i,267,this.boxWidth,this.boxHeight);
                 gr.setColor(this.color);
                 gr.fillRect(i+1,267+1,this.boxWidth,this.boxHeight);
+                gr.setColor(Color.black);
+                gr.drawRect(i,267,this.boxWidth,this.boxHeight);
             }
         }
     }
