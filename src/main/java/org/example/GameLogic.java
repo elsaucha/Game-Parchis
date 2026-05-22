@@ -40,6 +40,7 @@ public class GameLogic {
             case 1:
                 z = lastCell[piece.getLocation()]-(piece.getLocationPoint()+this.diceValue);
                 if (z >= 0){
+                    piece.setX(212);
                     piece.setY(piece.getY()+(25*this.diceValue));
                 }else {
                     piece.setY(212);
@@ -51,6 +52,7 @@ public class GameLogic {
             case 2:
                 z = lastCell[piece.getLocation()]-(piece.getLocationPoint()+this.diceValue);
                 if (z >= 0){
+                    piece.setY(212);
                     piece.setX(piece.getX()-(25*this.diceValue));
                     piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
                 }else {
