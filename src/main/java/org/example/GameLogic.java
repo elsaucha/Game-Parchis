@@ -222,6 +222,15 @@ public class GameLogic {
                 }
                 break;
             case 13:
+                if (piece.getColor() == 44){
+
+                }else if (piece.getColor() == 232){
+
+                }else if (piece.getColor() == 63){
+
+                }else{
+                    
+                }
                 break;
         }
 
