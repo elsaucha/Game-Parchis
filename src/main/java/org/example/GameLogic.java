@@ -56,23 +56,29 @@ public class GameLogic {
                     piece.setX(piece.getX()-(25*this.diceValue));
                     piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
                 }else {
-                    if (-z <= 2){
-                        piece.setX(3);
-                        piece.setY(piece.getY()+(92*(-z)));
-                        piece.setLocation(piece.getLocation()+1);
+                    if (piece.getColor() == 42) {
+                        piece.setX(2+(25*(-z-1)));
+                        piece.setY(304);
+                        piece.setLocation(13);
                     }else {
-                        piece.setY(395);
-                        piece.setX(3+(25*(-z-2))-1);
-                        piece.setLocation(piece.getLocation()+2);
+                        if (-z <= 2) {
+                            piece.setX(3);
+                            piece.setY(piece.getY() + (92 * (-z)));
+                            piece.setLocation(piece.getLocation() + 1);
+                            piece.setLocationPoint(piece.getLocationPoint() + this.diceValue);
+                        } else {
+                            piece.setY(395);
+                            piece.setX(3 + (25 * (-z - 2)) - 1);
+                            piece.setLocation(piece.getLocation() + 2);
+                            piece.setLocationPoint(piece.getLocationPoint() + this.diceValue);
+                        }
                     }
-                    piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
                 }
                 break;
             case 3:
                 z = lastCell[piece.getLocation()]-(piece.getLocationPoint()+this.diceValue);
                 if (piece.getColor() == 42){
                     piece.setLocation(13);
-
                 }else {
                     if (z >= 0){
                         piece.setY(piece.getY()+(92*this.diceValue));
@@ -101,16 +107,22 @@ public class GameLogic {
                     piece.setY(piece.getY()+(25*this.diceValue));
                     piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
                 }else {
-                    if (-z <= 2){
-                        piece.setY(603);
-                        piece.setX(piece.getX()+(92*(-z)));
-                        piece.setLocation(piece.getLocation()+1);
-                        piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
+                    if (piece.getColor() == 242) {
+                        piece.setX(304);
+                        piece.setY(602-(25*(-z-1)));
+                        piece.setLocation(13);
                     }else {
-                        piece.setX(395);
-                        piece.setY(603-(25*(-z-2))-1);
-                        piece.setLocation(piece.getLocation()+2);
-                        piece.setLocationPoint(this.diceValue-(68-piece.getLocationPoint()));
+                        if (-z < 2) {
+                            piece.setY(603);
+                            piece.setX(piece.getX() + (92 * (-z)));
+                            piece.setLocation(piece.getLocation() + 1);
+                            piece.setLocationPoint(piece.getLocationPoint() + this.diceValue);
+                        } else {
+                            piece.setX(395);
+                            piece.setY(603 - (25 * (-z - 2)) - 1);
+                            piece.setLocation(piece.getLocation() + 2);
+                            piece.setLocationPoint(this.diceValue - (68 - piece.getLocationPoint()));
+                        }
                     }
                 }
                 break;
@@ -118,7 +130,6 @@ public class GameLogic {
                 z = lastCell[piece.getLocation()]-(piece.getLocationPoint()+this.diceValue);
                 if (piece.getColor() == 242){
                     piece.setLocation(13);
-
                 }else {
                     if (z >= 0){
                         piece.setX(piece.getX()+(92*this.diceValue));
@@ -147,23 +158,29 @@ public class GameLogic {
                     piece.setX(piece.getX()+(25*this.diceValue));
                     piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
                 }else {
-                    if (-z <= 2){
-                        piece.setX(603);
-                        piece.setY(piece.getY()-(92*(-z)));
-                        piece.setLocation(piece.getLocation()+1);
+                    if (piece.getColor() == 44) {
+                        piece.setX(602-(25*(-z-1)));
+                        piece.setY(304);
+                        piece.setLocation(13);
                     }else {
-                        piece.setY(212);
-                        piece.setX(603-(25*(-z-2))-1);
-                        piece.setLocation(piece.getLocation()+2);
+                        if (-z <= 2) {
+                            piece.setX(603);
+                            piece.setY(piece.getY() - (92 * (-z)));
+                            piece.setLocation(piece.getLocation() + 1);
+                            piece.setLocationPoint(piece.getLocationPoint() + this.diceValue);
+                        } else {
+                            piece.setY(212);
+                            piece.setX(603 - (25 * (-z - 2)) - 1);
+                            piece.setLocation(piece.getLocation() + 2);
+                            piece.setLocationPoint(piece.getLocationPoint() + this.diceValue);
+                        }
                     }
-                    piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
                 }
                 break;
             case 9:
                 z = lastCell[piece.getLocation()]-(piece.getLocationPoint()+this.diceValue);
                 if (piece.getColor() == 44){
                     piece.setLocation(13);
-
                 }else {
                     if (z >= 0){
                         piece.setY(piece.getY()-(92*this.diceValue));
@@ -192,16 +209,22 @@ public class GameLogic {
                     piece.setY(piece.getY()-(25*this.diceValue));
                     piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
                 }else {
-                    if (-z <= 2){
-                        piece.setY(3);
-                        piece.setX(piece.getX()-(92*(-z)));
-                        piece.setLocation(piece.getLocation()+1);
-                        piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
+                    if (piece.getColor() == 232) {
+                        piece.setX(304);
+                        piece.setY(2+(25*(-z-1)));
+                        piece.setLocation(13);
                     }else {
-                        piece.setX(212);
-                        piece.setY(3+(25*(-z-2))-1);
-                        piece.setLocation(1);
-                        piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
+                        if (-z <= 2){
+                            piece.setY(3);
+                            piece.setX(piece.getX()-(92*(-z)));
+                            piece.setLocation(piece.getLocation()+1);
+                            piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
+                        }else {
+                            piece.setX(212);
+                            piece.setY(3+(25*(-z-2))-1);
+                            piece.setLocation(1);
+                            piece.setLocationPoint(piece.getLocationPoint()+this.diceValue);
+                        }
                     }
                 }
                 break;
@@ -209,7 +232,6 @@ public class GameLogic {
                 z = lastCell[piece.getLocation()]-(piece.getLocationPoint()+this.diceValue);
                 if (piece.getColor() == 232){
                     piece.setLocation(13);
-
                 }else {
                     if (z >= 0){
                         piece.setX(piece.getX()-(92*this.diceValue));
@@ -222,14 +244,30 @@ public class GameLogic {
                 }
                 break;
             case 13:
-                if (piece.getColor() == 44){
+                if (piece.getColor() == 232){
+                    if (piece.getY() < 25*8){
+                        piece.setY(piece.getY()+(25*this.diceValue));
+                    }else {
 
-                }else if (piece.getColor() == 232){
+                    }
+                }else if (piece.getColor() == 44){
+                    if (piece.getX() > 25*8){
+                        piece.setX(piece.getX()-(25*this.diceValue));
+                    }else {
 
-                }else if (piece.getColor() == 63){
+                    }
+                }else if (piece.getColor() == 242){
+                    if (piece.getY() > 25*8){
+                        piece.setY(piece.getY()-(25*this.diceValue));
+                    }else {
 
-                }else{
-                    
+                    }
+                }else {
+                    if (piece.getX() < 25*8){
+                        piece.setX(piece.getX()+(25*this.diceValue));
+                    }else {
+
+                    }
                 }
                 break;
         }
