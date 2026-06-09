@@ -2,7 +2,6 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.TimeUnit;
 
 public class Game extends JPanel{
     protected static final int WIDTH = 640;
@@ -159,7 +158,7 @@ public class Game extends JPanel{
     private void isPieceClicked(int x, int y){
         for (int i = 0; i<piecesList.length; i++){
             if (x >= piecesList[i].getX() && x <= piecesList[i].getX()+piecesList[i].getSize() && y >= piecesList[i].getY() && y <= piecesList[i].getY()+piecesList[i].getSize()){
-                gameLogic.movePiece(piecesList[i]);
+                gameLogic.getPieceNewCoordinates(piecesList[i], piecesList);
                 break;
             }
         }

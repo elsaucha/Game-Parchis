@@ -9,6 +9,7 @@ public class Piece {
     private int x, y;
     private int location = 0;
     private int locationPoint;
+    private boolean sharingCell = false;
 
     public Piece(int id, int x, int y, String color){
         this.id = id;
@@ -81,6 +82,14 @@ public class Piece {
 
     protected int getColor(){
         return this.color.getRed();
+    }
+
+    protected Boolean getStatus(){
+        return sharingCell;
+    }
+
+    protected void setStatus(Boolean status){
+        sharingCell = status;
     }
 
 }

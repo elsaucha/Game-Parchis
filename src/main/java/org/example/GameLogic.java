@@ -15,7 +15,7 @@ public class GameLogic {
         return diceValue;
     }
 
-    protected void movePiece(Piece piece){
+    protected void getPieceNewCoordinates(Piece piece, Piece[] piecesList){
         int z;
         switch (piece.getLocation()){
             case 0:
@@ -271,8 +271,30 @@ public class GameLogic {
                 }
                 break;
         }
+        isAlreadyPieceInCell(piece, piecesList);
+    }
+
+    private void isAlreadyPieceInCell(Piece piece, Piece[] piecesList){
+        for (int i = 0; i < piecesList.length; i++){
+            if (piecesList[i].getX() == piece.getX() && piecesList[i].getY() == piece.getY()){
+                if (piece.getLocation() == 1 || piece.getLocation() == 5 || piece.getLocation() == 6 || piece.getLocation() == 7 || piece.getLocation() == 11 || piece.getLocation() == 12){
+                    piece.setX(piece.getX()+15);
+                    piecesList[i].setX(piecesList[i].getX()-15);
+                }else if(piece.getLocation() == 2 || piece.getLocation() == 3 || piece.getLocation() == 4 || piece.getLocation() == 8 || piece.getLocation() == 9 || piece.getLocation() == 10){
+                    piece.setY(piece.getY()+15);
+                    piecesList[i].setY(piecesList[i].getY()-15);
+                }
+                piece.setStatus(true);
+                piecesList[i].setStatus(true);
+            }
+        }
+    }
+
+    private void setPieceNewCoordinates(){
 
     }
 
-
 }
+
+//en getPieceNewCoordinates llamar a setPieceNewCoordinates para hacer setX y setY.
+//en setPieceNewCoordinates comprobar el estado de sharingCell llamando a piece.getStatus(). si es true, mover las piezas en 15
