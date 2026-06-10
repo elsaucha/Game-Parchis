@@ -64,8 +64,6 @@ public class Game extends JPanel{
     private void drawDice(Graphics2D graphics){
         int value = gameLogic.getDiceValue();
         graphics.drawImage(dice.diceImages[value-1],dicePositionX, DicePositionY,diceSize,diceSize,null);
-
-        //graphics.drawImage(redDice.diceImages[value-1], 175/2-diceSize/2, 175/2-diceSize/2, diceSize, diceSize, null);
     }
 
     private void createPieces(){

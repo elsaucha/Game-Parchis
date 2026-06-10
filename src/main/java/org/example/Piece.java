@@ -81,15 +81,19 @@ public class Piece {
     }
 
     protected int getColor(){
-        return this.color.getRed();
+        return color.getRed();
     }
 
-    protected Boolean getStatus(){
+    protected Boolean getSharingCellStatus(){
         return sharingCell;
     }
 
-    protected void setStatus(Boolean status){
-        sharingCell = status;
+    protected void setSharingCellStatus(Boolean status){
+        this.sharingCell = status;
+    }
+
+    protected int getId(){
+        return id;
     }
 
 }
