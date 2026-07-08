@@ -10,6 +10,8 @@ public class Piece {
     private int location = 0;
     private int locationPoint;
     private boolean sharingCell = false;
+    private int oldX, oldY;
+    private Piece pieceSharingWith;
 
     public Piece(int id, int x, int y, String color){
         this.id = id;
@@ -94,6 +96,29 @@ public class Piece {
 
     protected int getId(){
         return id;
+    }
+    protected void setOldX(int x){
+        this.oldX = x;
+    }
+
+    protected int getOldX(){
+        return oldX;
+    }
+
+    protected int getOldY(){
+        return oldY;
+    }
+
+    protected void setOldY(int y){
+        this.oldY = y;
+    }
+
+    protected void setPieceSharingWith(Piece pieceSharingWith){
+        this.pieceSharingWith = pieceSharingWith;
+    }
+
+    protected Piece getPieceSharingWith(){
+        return pieceSharingWith;
     }
 
 }
